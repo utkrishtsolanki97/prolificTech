@@ -1,0 +1,18 @@
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+}
+
+@media (min-width: 992px) {
+    .bg-light {
+        padding-left: 40px;
+    }
+    .right.navbar-nav {
+    margin-left: 46%;
+    }
+}
+@media (max-width: 992px) {
+    .navbar-nav .nav-link {
+        padding-left: 20px;
+    }
+}

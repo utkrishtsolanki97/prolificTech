@@ -1,0 +1,11 @@
+.App {
+  
+  font-family: 'Poppins', sans-serif;
+}
+main{
+  min-height: 80vh;
+}
+.btn{
+  margin-top: 20px;
+  margin-bottom: 10px
+}

@@ -18,7 +18,7 @@ const UploadProducts = ({history}) => {
 
     const [productName, setProductName] = useState('')
     const [stock, setStock] = useState(0)
-    const [subCategory, setSubCategory] = useState('')
+    const [subCategory, setSubCategory] = useState('Select Sub Category')
     const [description, setDescription] = useState('')
     const [actualPrice, setActualPrice] = useState(0)
     const [discountedPrice, setDiscountedPrice] = useState(0)
@@ -146,7 +146,7 @@ const UploadProducts = ({history}) => {
                     <Form.Label>SubCategory</Form.Label>
                     <Dropdown onSelect={handleDropdownSelection}>
                         <Dropdown.Toggle id="dropdown-basic">
-                            Select Sub Category
+                            {subCategory}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>

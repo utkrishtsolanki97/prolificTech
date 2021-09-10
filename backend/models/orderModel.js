@@ -6,22 +6,29 @@ const orderSchema = mongoose.Schema({
         required: true,
         ref : 'User'
     },
-    order_items : [
+    orderItems : [
         {
-            productName: { type : String , required : true },
+            productName: { type: String, required: true },
+            quantity: { type: Number, required: true },
+            subCategory: { type: String, required: true },
+            image: { type: String, required: true },
+            price: { type: Number, required: true },
+            HSN: { type: String, required: true },
             product: {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref : 'User' },
-            quantity : { type : Number , required : true },
-            price : { type : Number , required : true },
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Product',
+        },
         }
     ],
-    shipping_address : {
+    shippingAddress : {
+        name : { type : String , required : true },
+        addressName : { type : String},
         address : { type : String , required : true },
         city : { type : String , required : true },
         postalCode : { type : String , required : true },
-        country : { type : String , required : true }
+        country : { type : String , required : true },
+        phoneNumber : { type : Number , required : true }
     },
     payment_method : {
         type: String,
@@ -30,25 +37,24 @@ const orderSchema = mongoose.Schema({
     payment_result: {
         id : { type : String },
         status : { type : String },
-        update_time : { type : String },
-        email : { type : String },
+        updated_time : { type : String },
     },
-    tax_price : {
+    tax : {
         type: Number,
         required: true,
         default: 0.0
     },
-    shipping_price : {
+    shipping : {
         type: Number,
         required: true,
         default: 0.0
     },
-    total_price : {
+    totalPrice : {
         type: Number,
         required: true,
         default: 0.0
     },
-    is_paid : {
+    isPaid : {
         type: Boolean,
         required: true,
         default: false,
@@ -66,8 +72,6 @@ const orderSchema = mongoose.Schema({
     delivered_at : {
         type: Date
     },
-    
-    
     
 },{
     timestamp: true

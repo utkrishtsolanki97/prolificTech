@@ -17,19 +17,25 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import jwt from 'jsonwebtoken'
+import ShippingScreen from './screens/ShippingScreen';
+import OrderState from './context/Orders/OrderState';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import MyOrderScreen from './screens/MyOrderScreen';
 
 function App() {
   if(localStorage.getItem('userDetails')){
     const user = JSON.parse(atob(localStorage.getItem('userDetails')))
-    const decoded = jwt.verify(user.token, atob("N1FbJHV0aysmOkNdNGhHVA=="))
-    const now = Date.now().valueOf() 
-    if(now>decoded.exp){
-      console.log('Successfully logged in');
-    }
-    else{
-      console.log('Token Expired pleaselogin again');
-      localStorage.removeItem('cartItems')
-    }
+    jwt.verify(user.token, atob("N1FbJHV0aysmOkNdNGhHVA=="), function(err, decoded){
+      if (err) {
+        console.log('Token Expired pleaselogin again');
+      localStorage.removeItem('userDetails')
+      }
+      else{
+        console.log('Successfully logged in');
+      }
+    })
+    
   }
   
   const routes = (
@@ -38,6 +44,10 @@ function App() {
       <Container>
         <main className='py-3'>
           <Route path='/login' component={SignInScreen} />
+          <Route path='/shipping' component={ShippingScreen} />
+          <Route path='/payment' component={PaymentScreen} />
+          <Route path='/placeorder' component={PlaceOrderScreen} />
+          <Route path='/myOrders' component={MyOrderScreen} />
           <Route path='/register' component={SignupScreen} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path='/admin/userlist' component={UserListScreen} />
@@ -57,9 +67,11 @@ function App() {
     <Router >
       <ProductState>
         <UserState>
-          <div className="App">
-            {routes}
-          </div>
+          <OrderState>
+            <div className="App">
+              {routes}
+            </div>
+          </OrderState>
         </UserState>
       </ProductState>
     </Router>

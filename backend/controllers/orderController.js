@@ -1,132 +1,170 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
+import shortid from 'shortid'
+import Razorpay from 'razorpay'
 
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
-const addOrderItems = asyncHandler( async(req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    const {orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice} = req.body
-    
+const addOrderItems = asyncHandler(async (req, res) => {
+    const {
+      orderItems,
+      price,
+      paymentStatus,
+      address,
+      paymentMethod,
+    } = req.body
 
-    // const x = {
-    //     order_items: orderItems,
-    //     user: req.User._id,
-    //     shipping_address :shippingAddress,
-    //     payment_method:paymentMethod, 
-    //     tax_price : taxPrice, 
-    //     shipping_price:shippingPrice, 
-    //     total_price:totalPrice
-    // }
-    // console.log('into Order',x);
+  
+    if (orderItems && orderItems.length === 0) {
+      res.status(400)
+      throw new Error('No order items')
+      return
+    } else {
+      const setOrder = !paymentStatus ? {
+        orderItems,
+        user: req.User._id,
+        shippingAddress: address,
+        payment_method :paymentMethod,
+        itemsPrice: price.cartTotal,
+        tax: price.tax,
+        shipping: price.shipping,
+        totalPrice: price.totalPayable,
+        isPaid: false,
+        ordered_on: Date.now(),
+      } : {
+        orderItems,
+        user: req.User._id,
+        shippingAddress: address,
+        payment_method :paymentMethod,
+        itemsPrice: price.cartTotal,
+        tax: price.tax,
+        shipping: price.shipping,
+        totalPrice: price.totalPayable,
+        payment_result: {
+          id: paymentStatus.razorpay_payment_id,
+          status: 'Paid',
+          updated_time: Date.now()
+        },
+        isPaid: true,
+        ordered_on: Date.now(),
+        paid_at: Date.now()
+      }
+      const order = new Order(setOrder)
+  
+      const createdOrder = await order.save()
+  
+      res.status(201).json(createdOrder)
     
-
-    if(orderItems  && orderItems.length === 0){
-        res.status(400)
-        throw new Error('No order items')
-        return
     }
-    else{
-        const x = {
-            order_items: orderItems,
-            user: req.User._id,
-            shipping_address :shippingAddress,
-            payment_method:paymentMethod, 
-            tax_price : taxPrice, 
-            shipping_price:shippingPrice, 
-            total_price:totalPrice
-        }
-        const order = new Order({
-            order_items: orderItems,
-            user: req.User._id,
-            shipping_address :shippingAddress,
-            payment_method:paymentMethod, 
-            tax_price : taxPrice, 
-            shipping_price:shippingPrice, 
-            total_price:totalPrice,
-            ordered_on: Date.now()
-        })
-
-        const createdOrder = await order.save()
-
-        res.status(201).json(createdOrder)
-    }
-})
-
-// @desc    Get order by ID
-// @route   GET /api/order/:id
-// @access  Private
-
-const getOrderById = asyncHandler( async(req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    
-    const order = await Order.findById(req.params.id).populate('user','name email')
-    
-    console.log(order);
+  })
+  
+  // @desc    Get order by ID
+  // @route   GET /api/orders/:id
+  // @access  Private
+  const getOrderById = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'name email'
+    )
+  
     if (order) {
-        const x = res.json(order)
-        console.log(x);
-        res.json(order)
-        
+      res.json(order)
+    } else {
+      res.status(404)
+      throw new Error('Order not found')
     }
-    else{
-        res.status(404).json({message: 'Sorry no Order found'})
-    }
-})
-
-// @desc    Update order to paid
-// @route   PUT /api/order/:id/pay
-// @access  Private
-
-const updateOrderToPaid = asyncHandler( async(req, res) => {
-
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    console.log('into ');
+  })
+  
+  // @desc    Update order to paid
+  // @route   GET /api/orders/:id/pay
+  // @access  Private
+  const updateOrderToPaid = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id)
-    console.log(order);
+  
     if (order) {
-        order.is_paid=true
-        order.paid_at=Date.now()
-        // order.paymentResult = {
-        //     id:req.body.id,
-        //     status: req.body.status,
-        //     uptate_time: req.body.uptate_time,
-        //     email_address: req.body.payer.email_address
-        // }
-        const updatedOrder = await order.save()
-        console.log(updatedOrder);
-        res.json(updatedOrder)
+      order.isPaid = true
+      order.paidAt = Date.now()
+      order.paymentResult = {
+        id: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.payer.email_address,
+      }
+  
+      const updatedOrder = await order.save()
+  
+      res.json(updatedOrder)
+    } else {
+      res.status(404)
+      throw new Error('Order not found')
     }
-    else{
-        res.status(404).json({message: 'Sorry no Order found'})
+  })
+  
+  // @desc    Update order to delivered
+  // @route   GET /api/orders/:id/deliver
+  // @access  Private/Admin
+  const updateOrderToDelivered = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id)
+  
+    if (order) {
+      order.isDelivered = true
+      order.deliveredAt = Date.now()
+  
+      const updatedOrder = await order.save()
+  
+      res.json(updatedOrder)
+    } else {
+      res.status(404)
+      throw new Error('Order not found')
     }
-})
+  })
+  
+  // @desc    Get logged in user orders
+  // @route   GET /api/orders/myorders
+  // @access  Private
+  const getMyOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.User._id })
+    res.json(orders)
+  })
+  
+  // @desc    Get all orders
+  // @route   GET /api/orders
+  // @access  Private/Admin
+  const getOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate('user', 'id name')
+    res.json(orders)
+  })
 
-// @desc    Get orders of a user
-// @route   PUT /api/order/myorders
+// @desc    Setup Payment process 
+// @route   POST /api/order/razorpay
 // @access  Private
 
-const getMyOrder = asyncHandler( async(req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    const orders = await Order.find({user: req.User._id})
-    
-        res.json(orders)
+const getRazorpayId = asyncHandler( async(req, res) => {
+    var razorpay = new Razorpay({ key_id: process.env.razorpay_test_key, key_secret: process.env.razorpay_test_secret })
+    const {
+        amount,
+        currency,
+    } = req.body
+    const receipt = 'ProlificTech_'+shortid.generate()
+    const options = {
+        amount: amount*100,
+        currency,
+        receipt,
+    }
+    try {
+		const response = await razorpay.orders.create(options)
+		// console.log(response)
+		res.json({
+			id: response.id,
+			currency: response.currency,
+			amount: response.amount,
+            receipt: response.receipt,
+            created_at: response.created_at,
+		})
+	} catch (error) {
+		console.log(error)
+	}
     
 })
 
@@ -135,5 +173,6 @@ export {
     addOrderItems,
     getOrderById,
     updateOrderToPaid,
-    getMyOrder
+    getMyOrders,
+    getRazorpayId,
 }

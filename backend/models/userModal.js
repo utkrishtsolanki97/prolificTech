@@ -3,10 +3,12 @@ import bcrypt from "bcryptjs";
 
 const addressSchema = mongoose.Schema({
     addressName: { type: String },
+    name: {type: String},
     address: { type: String },
     city: { type: String },
     postalCode: { type: Number },
     country: { type: String },
+    phoneNumber : { type: Number }
 })
 
 const userSchema = mongoose.Schema({

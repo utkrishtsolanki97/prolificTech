@@ -1,4 +1,5 @@
 import express from 'express'
+import { getRazorpayId } from '../controllers/orderController.js';
 const router = express.Router()
 
 import { createProduct, deleteProduct, getProduct, getProductById, updateProduct } from '../controllers/productController.js';

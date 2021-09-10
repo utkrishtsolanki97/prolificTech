@@ -59,8 +59,8 @@ console.log(product);
                     <Row>
                       <Col>Price:</Col>
                       <Col className="product-placement">
-                        <strong className='product-discountedPrice-product'>₹{product.discountedPrice}</strong>
-                        <strong className='product-strike'>₹{product.actualPrice}</strong>
+                        <strong className='product-discountedPrice-product'>₹{product.actualPrice}</strong>
+                        <strong className='product-strike'>₹{product.discountedPrice}</strong>
                       </Col>
                     </Row>
                    

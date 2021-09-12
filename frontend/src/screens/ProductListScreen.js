@@ -142,7 +142,7 @@ const ProductListScreen = ({ history, match }) => {
                   <td>{index+1}</td>
                   <td>{product.images.length>0 ?  <Image  src={product.images[0].url} alt={product.productName} fluid rounded width='100px' /> : <Image src={errorImage} alt={product.productName} fluid rounded width='100px' /> }</td>
                   <td>{product.productName}</td>
-                  <td>${product.discountedPrice}</td>
+                  <td>₹{product.discountedPrice}</td>
                   <td>{product.subCategory}</td>
                   <td>{product.stock}</td>
                   <td>

@@ -97,7 +97,7 @@ const OrderScreen = ({ match, history }) => {
                             </Link>
                           </Col>
                           <Col md={4}>
-                            {item.quantity} x ${item.price} = ${item.quantity * item.price}
+                            {item.quantity} x ₹{item.price} = ₹{item.quantity * item.price}
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -116,25 +116,25 @@ const OrderScreen = ({ match, history }) => {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${orderContext.selectedOrder.itemsPrice && orderContext.selectedOrder.itemsPrice}</Col>
+                    <Col>₹{orderContext.selectedOrder.itemsPrice && orderContext.selectedOrder.itemsPrice}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${orderContext.selectedOrder.shipping}</Col>
+                    <Col>₹{orderContext.selectedOrder.shipping}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${orderContext.selectedOrder.tax}</Col>
+                    <Col>₹{orderContext.selectedOrder.tax}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Total</Col>
-                    <Col>${orderContext.selectedOrder.totalPrice}</Col>
+                    <Col>₹{orderContext.selectedOrder.totalPrice}</Col>
                   </Row>
                 </ListGroup.Item>
                 {/* {!orderContext.selectedOrder.isPaid && (

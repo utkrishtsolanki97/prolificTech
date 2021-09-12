@@ -119,25 +119,25 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${PriceDetails.cartTotal}</Col>
+                  <Col>₹{PriceDetails.cartTotal}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${PriceDetails.shipping}</Col>
+                  <Col>₹{PriceDetails.shipping}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${PriceDetails.tax}</Col>
+                  <Col>₹{PriceDetails.tax}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${PriceDetails.totalPayable}</Col>
+                  <Col>₹{PriceDetails.totalPayable}</Col>
                 </Row>
               </ListGroup.Item>
               {orderContext.uploadOrderErrorMessage &&<ListGroup.Item>

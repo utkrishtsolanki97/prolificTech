@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useReducer } from 'react'
 import OrderContext from './OrderContext'
 import OrderReducer from './OrderReducer'
-import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS } from './type'
+import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS, UPDATE_CART } from './type'
 
 const OrderState = (props) => {
 
@@ -98,6 +98,9 @@ const OrderState = (props) => {
             type: SET_PAYMENT_STATUS,
             payload: res
         })
+        dispatch({
+            type: UPDATE_CART,
+        })
     }
 
     const setPaymentMethod = (res) => {
@@ -112,6 +115,7 @@ const OrderState = (props) => {
         const order  = {}
         const ordered_items = []
         const cart = JSON.parse(localStorage.getItem('cartItems'))
+        console.log(cart);
         cart.forEach(item => {
             const x = {}
             x.productName = item.productName

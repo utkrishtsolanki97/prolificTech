@@ -18,7 +18,7 @@ const PlaceOrderScreen = ({ history }) => {
     history.push('/payment')
   }
   // const {cart, deliveryAddress, cartTotal, paymentStatus} = orderContext
-  const cart = orderContext.cart
+  const cart = orderContext.cart || JSON.parse(localStorage.getItem('cartItems'))
   const deliveryAddress = orderContext.deliveryAddress
   const PriceDetails = orderContext.cartTotal
   const paymentStatus = orderContext.paymentStatus

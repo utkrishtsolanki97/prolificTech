@@ -1,4 +1,4 @@
-import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS } from './type'
+import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS, UPDATE_CART } from './type'
 
 export default (state,action) => {
     switch (action.type) {
@@ -72,6 +72,11 @@ export default (state,action) => {
                 ...state,
                 selectedOrder: action.payload,
                 loading: false
+            }
+        case UPDATE_CART:
+            return{
+                ...state,
+                cart: JSON.parse(localStorage.getItem('cartItems')),
             }
     
         default:

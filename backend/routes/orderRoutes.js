@@ -1,16 +1,18 @@
 import express from 'express'
 const router = express.Router()
-import { addOrderItems, getMyOrders, getOrderById, getRazorpayId, updateOrderToPaid } from '../controllers/orderController.js';
-import { protect } from '../middlewear/authMiddlewear.js';
+import { addOrderItems, getMyOrders, getOrderById, getOrders, getRazorpayId, updateOrderToDelivered, updateOrderToPaid } from '../controllers/orderController.js';
+import { admin, protect } from '../middlewear/authMiddlewear.js';
 
-router.route('/').post(protect, addOrderItems)
+router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders)
 
 router.route('/myorders').get(protect, getMyOrders)
 
 router.route('/razorpay').post(protect ,getRazorpayId)
 
 
-// router.route('/:id').get(protect, getOrderById)
+router.route('/:id').get(protect, getOrderById)
+
+router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered)
 
 // router.route('/:id/pay').put(protect, updateOrderToPaid)
 

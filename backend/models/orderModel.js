@@ -39,6 +39,11 @@ const orderSchema = mongoose.Schema({
         status : { type : String },
         updated_time : { type : String },
     },
+    itemsPrice : {
+        type: Number,
+        required: true,
+        default: 0.0
+    },
     tax : {
         type: Number,
         required: true,

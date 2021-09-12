@@ -35,6 +35,7 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push('/login')
     }
+     // eslint-disable-next-line
   }, [ history, userContext.user, userContext.deleteUserStatus])
 
   const deleteHandler = (id) => {
@@ -48,6 +49,7 @@ const UserListScreen = ({ history }) => {
     if(userContext.deleteUserStatus){
       userContext.refreshDeleteErrorMesssage()
     }
+     // eslint-disable-next-line
   },[userContext.deleteUserStatus])
 
   return (

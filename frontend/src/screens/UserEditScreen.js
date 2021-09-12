@@ -23,6 +23,7 @@ const UserEditScreen = ({ match, history }) => {
 
   useEffect(()=>{
     userContext.getUserById(userId)
+     // eslint-disable-next-line
   },[history])
   useEffect(()=>{
     if(userContext.adminupdateUserStatus){
@@ -36,6 +37,7 @@ const UserEditScreen = ({ match, history }) => {
       setPhone(userContext.userById.phoneNumber)
       setIsAdmin(userContext.userById.isAdmin)
     }
+     // eslint-disable-next-line
   },[userContext.userById, userContext.adminupdateUserStatus])
 
   

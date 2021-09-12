@@ -33,13 +33,14 @@ const Cart = ({ match, location, history }) => {
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
     // productContext.cart.reduce((acc, item) =>  console.log(typeof(item.quantity)))
   
-    const cartItems = []
+    
   
     useEffect(() => {
       if (productId) {
         productContext.addProductToCart(productId, qty)
         setCartTotal(productContext.cart.reduce((acc, item) => acc + item.quantity * item.discountedPrice, 0).toFixed(2))
       }
+       // eslint-disable-next-line
     }, [productId, qty])
   
   

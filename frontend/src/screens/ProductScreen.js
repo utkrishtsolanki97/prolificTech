@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Form, Alert, Spinner } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button, Form,  Spinner } from 'react-bootstrap'
 // import Rating from '../components/Rating'
 import Meta from '../Components/Meta'
 import ProductContext from '../context/Products/productContext'
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
+  // const [rating, setRating] = useState(0)
+  // const [comment, setComment] = useState('')
 
   const productContext = useContext(ProductContext)
   const product = productContext.product
@@ -16,6 +16,7 @@ const ProductScreen = ({ history, match }) => {
 console.log(product);
   useEffect(() => {
         productContext.getProduct(match.params.id)
+         // eslint-disable-next-line
   }, [])
 
   const addToCartHandler = () => {

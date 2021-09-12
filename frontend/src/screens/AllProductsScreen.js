@@ -11,7 +11,7 @@ const AllProductsScreen = () => {
         if (productContext.allproducts.length === 0) {
             productContext.getAllProducts()
         }
-        
+         // eslint-disable-next-line
     }, [])
 
     // useEffect(() => {

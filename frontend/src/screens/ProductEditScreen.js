@@ -41,6 +41,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   useEffect(()=>{
     productContext.getProduct(productId)
+     // eslint-disable-next-line
   },[])
 
   useEffect(()=>{
@@ -62,6 +63,7 @@ const ProductEditScreen = ({ match, history }) => {
       setHSN(productContext.product.HSN)
       setImages(productContext.product.images)
     }
+     // eslint-disable-next-line
   },[productContext.product, productContext.adminupdateProductStatus])
 
   const uploadProductHandler = (e) => {
@@ -134,7 +136,7 @@ const removefromarray = function(arr, attr, value){
 }
 
 
-  const successUpdate = false
+  
   
   const error = '', loading=false
 

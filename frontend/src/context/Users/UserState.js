@@ -59,7 +59,6 @@ const UserState = (props) => {
 
     const userRegister = async (name,phoneNumber,gender,email,password) => {
         setLoading()
-        let user = null
         try {
             const config = {
                 headers: {

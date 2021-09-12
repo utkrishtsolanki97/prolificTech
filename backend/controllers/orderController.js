@@ -8,7 +8,7 @@ import Razorpay from 'razorpay'
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
     const {
-      orderItems,
+      ordered_items,
       price,
       paymentStatus,
       address,
@@ -16,13 +16,13 @@ const addOrderItems = asyncHandler(async (req, res) => {
     } = req.body
 
   
-    if (orderItems && orderItems.length === 0) {
+    if (ordered_items && ordered_items.length === 0) {
       res.status(400)
       throw new Error('No order items')
       return
     } else {
       const setOrder = !paymentStatus ? {
-        orderItems,
+        orderItems: ordered_items,
         user: req.User._id,
         shippingAddress: address,
         payment_method :paymentMethod,
@@ -33,7 +33,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
         isPaid: false,
         ordered_on: Date.now(),
       } : {
-        orderItems,
+        orderItems: ordered_items,
         user: req.User._id,
         shippingAddress: address,
         payment_method :paymentMethod,
@@ -164,6 +164,7 @@ const getRazorpayId = asyncHandler( async(req, res) => {
 		})
 	} catch (error) {
 		console.log(error)
+    console.log('hi')
 	}
     
 })
@@ -175,4 +176,6 @@ export {
     updateOrderToPaid,
     getMyOrders,
     getRazorpayId,
+    getOrders,
+    updateOrderToDelivered,
 }

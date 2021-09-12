@@ -2,11 +2,12 @@ import axios from 'axios'
 import React, { useReducer } from 'react'
 import OrderContext from './OrderContext'
 import OrderReducer from './OrderReducer'
-import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS } from './type'
+import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS } from './type'
 
 const OrderState = (props) => {
 
     const initialState = {
+        loading: false,
         cart: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
         deliveryAddress: {
             address: "",
@@ -24,6 +25,7 @@ const OrderState = (props) => {
         uploadOrderStatus: false,
         uploadOrderErrorMessage: '',
         orders: [],
+        selectedOrder: {},
     }
 
     const [state, dispatch] = useReducer(OrderReducer, initialState)
@@ -77,6 +79,7 @@ const OrderState = (props) => {
         const user = JSON.parse(atob(localStorage.getItem('userDetails')))
         const currency = "INR"
         const amount = state.cartTotal.totalPayable
+        // console.log(amount);
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -108,7 +111,8 @@ const OrderState = (props) => {
         const user = JSON.parse(atob(localStorage.getItem('userDetails')))
         const order  = {}
         const ordered_items = []
-        state.cart.forEach(item => {
+        const cart = JSON.parse(localStorage.getItem('cartItems'))
+        cart.forEach(item => {
             const x = {}
             x.productName = item.productName
             x.quantity = item.quantity
@@ -174,6 +178,60 @@ const OrderState = (props) => {
         }
     }
 
+    const getSelectedOrder = async (id) => {
+        const user = JSON.parse(atob(localStorage.getItem('userDetails')))
+        setLoading()
+        console.log('into order');
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                },
+              }
+            const res = await axios.get(`/api/order/${id}`, config);
+            dispatch({
+                type: GET_SINGLE_ORDERS,
+                payload: res.data,  
+            })
+            // offline
+            // const res = await axios.get(`/offline/products/${id}`);
+            // dispatch({
+            //     type: GET_SINGLE_PRODUCTS,
+            //     payload: res.data,  
+            // })
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const getadminOrders = async() => {
+        const user = JSON.parse(atob(localStorage.getItem('userDetails')))
+        setLoading()
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                },
+              }
+            const res = await axios.get(`/api/order`,config);
+            console.log(res.data);
+            dispatch({
+                type: GET_ALL_ORDERS,
+                payload: res.data,  
+            })
+            
+        } catch (error) {
+            
+            console.log(error.response);
+            // dispatch({
+            //     type: ADMIN_UPDATE_PRODUCT_ERROR_MESSAGE,
+            //     payload:  errorMsg,  
+            // })
+        }
+    }
+
     return (
         <OrderContext.Provider value={{
             setTotal,
@@ -193,6 +251,9 @@ const OrderState = (props) => {
             uploadOrderStatus: state.uploadOrderStatus,
             getLoggedinUserOrders,
             orders: state.orders,
+            selectedOrder: state.selectedOrder,
+            getSelectedOrder,
+            getadminOrders,
         }}>
             {props.children}
         </OrderContext.Provider>

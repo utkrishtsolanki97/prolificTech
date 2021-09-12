@@ -1,5 +1,5 @@
 import React, {  useContext, useEffect, useState } from 'react'
-import { Button, Form, Row, Col } from 'react-bootstrap'
+import { Button, Form,  Col } from 'react-bootstrap'
 import CheckoutSteps from '../Components/CheckoutSteps'
 import FormContainer from '../Components/FormContainer'
 import OrderContext from '../context/Orders/OrderContext'
@@ -18,15 +18,16 @@ const PaymentScreen = ({history}) => {
     
     // const dispatch = useDispatch()
 
-    const submitHandler =(e) => {
-        e.preventDefault();
-        // dispatch(savePaymentMethod(paymentMethod))
-        history.push('/placeorder')
-    }
+    // const submitHandler =(e) => {
+    //     e.preventDefault();
+    //     // dispatch(savePaymentMethod(paymentMethod))
+    //     history.push('/placeorder')
+    // }
 
 
     useEffect(()=>{
         paymentComplete && history.push('/placeorder')
+         // eslint-disable-next-line
     },[paymentComplete])
 
 
@@ -46,13 +47,14 @@ const PaymentScreen = ({history}) => {
         })
     }
     
-    const __DEV__ = document.domain === 'localhost'
+    // const __DEV__ = document.domain === 'localhost'
 
 
     useEffect(()=>{
         if(paymentMethod){
             displayRazorpay()
         }
+         // eslint-disable-next-line
     },[orderContext.razorPayDetails])
 
     const startPaymentHandler = (e) =>{
@@ -88,6 +90,7 @@ const PaymentScreen = ({history}) => {
             "order_id": details.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 orderContext.setPaymentStatus(response)
+                console.log(response);
                 setPaymentComplete(true)
             },
             "prefill": {

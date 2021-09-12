@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import CheckoutSteps from '../Components/CheckoutSteps'
 import OrderContext from '../context/Orders/OrderContext'
@@ -10,7 +10,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   // const cart = useSelector((state) => state.cart)
   const orderContext = useContext(OrderContext)
-  const Message= '', error=''
+  const Message= ''
 
   if (!orderContext.deliveryAddress) {
     history.push('/shipping')

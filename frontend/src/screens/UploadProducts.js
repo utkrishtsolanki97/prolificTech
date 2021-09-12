@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Col, Row, Form, Spinner, Table, Alert, Dropdown } from 'react-bootstrap'
+import { Button, Form, Spinner, Table, Alert, Dropdown } from 'react-bootstrap'
 import ProductContext from '../context/Products/productContext'
 import {storage} from '../Firebase/Firebase'
 const UploadProducts = ({history}) => {
@@ -115,7 +115,7 @@ const UploadProducts = ({history}) => {
         if(productContext.uploadProductStatus){
             history.push('/admin/productlist')
         }
-        
+        // eslint-disable-next-line 
     },[productContext.uploadedProduct, productContext.uploadProductErrorMessage])
 
     const handleDropdownSelection = (e) => {

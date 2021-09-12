@@ -50,6 +50,7 @@ const SignupScreen = ({ location, history }) => {
         userContext.refreshRegisteredUser()
         history.push('/login')
       }
+       // eslint-disable-next-line
     },[userContext.registeredUserStatus])
   
     return (

@@ -22,6 +22,8 @@ import OrderState from './context/Orders/OrderState';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import MyOrderScreen from './screens/MyOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import OrderListScreen from './screens/OrderListScreen';
 
 function App() {
   if(localStorage.getItem('userDetails')){
@@ -48,6 +50,7 @@ function App() {
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/placeorder' component={PlaceOrderScreen} />
           <Route path='/myOrders' component={MyOrderScreen} />
+          <Route path='/order/:id' component={OrderScreen} />
           <Route path='/register' component={SignupScreen} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path='/admin/userlist' component={UserListScreen} />
@@ -56,6 +59,7 @@ function App() {
           {/* <Route path='/admin/productlist/:pageNumber' component={ProductListScreen} exact /> */}
           <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
           <Route path='/admin/uploadproducts' component={UploadProducts} />
+          <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/' component={AllProductsScreen} exact />
           <Route path='/product/:id' component={ProductScreen} />
         </main>

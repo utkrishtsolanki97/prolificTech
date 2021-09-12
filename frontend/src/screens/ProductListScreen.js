@@ -30,7 +30,7 @@ const ProductListScreen = ({ history, match }) => {
   //   success: successDelete,
   // } = productDelete
 
-  const loading = false,error = null, products=[]
+  const loading = false,error = null
 
   // const productCreate = useSelector((state) => state.productCreate)
   // const {
@@ -79,6 +79,7 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       history.push('/login')
     }
+     // eslint-disable-next-line
   }, [ history,  productContext.product, productContext.deleteProductStatus])
   
     
@@ -98,6 +99,7 @@ const ProductListScreen = ({ history, match }) => {
     if(productContext.deleteProductStatus){
       productContext.refreshDeleteErrorMesssage()
     }
+     // eslint-disable-next-line
   },[productContext.deleteProductStatus])
 
   return (

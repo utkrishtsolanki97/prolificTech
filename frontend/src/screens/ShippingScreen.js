@@ -29,14 +29,14 @@ const ShippingScreen = ({ history }) => {
     // dispatch(saveShippingAddress({ address, city, postalCode, country }))
     history.push('/payment')
   }
-  const submitNewAddressHandler = (e) => {
-    e.preventDefault()
+  // const submitNewAddressHandler = (e) => {
+  //   e.preventDefault()
     
-    console.log(address);
-    orderContext.setAddress(address, addressName,city, country, name, phoneNumber, postalCode)
-    // dispatch(saveShippingAddress({ address, city, postalCode, country }))
-    history.push('/payment')
-  }
+  //   console.log(address);
+  //   orderContext.setAddress(address, addressName,city, country, name, phoneNumber, postalCode)
+  //   // dispatch(saveShippingAddress({ address, city, postalCode, country }))
+  //   history.push('/payment')
+  // }
   console.log(orderContext.deliveryAddress);
   return (
     <div>
@@ -68,7 +68,7 @@ const ShippingScreen = ({ history }) => {
       </div>
       
         
-      <a name='new-address' />
+      <div name='new-address'  />
       <h1>Add a New Address</h1>
       
         <Form onSubmit={submitHandler}>

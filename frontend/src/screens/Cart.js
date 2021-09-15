@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import ProductContext from '../context/Products/productContext'
 import errorImage from '../assets/error-image-generic.png'
 import OrderContext from '../context/Orders/OrderContext'
-import './Cart.css'
+import './Cart.scss'
 
 const Cart = ({ match, location, history }) => {
     const productContext = useContext(ProductContext)
@@ -56,7 +56,7 @@ const Cart = ({ match, location, history }) => {
     }
   
     return (
-      <Row>
+      <Row className="cartCss">
         <Col md={8}>
           <h1>Shopping Cart</h1>
           {productContext.cart.length === 0 ? (

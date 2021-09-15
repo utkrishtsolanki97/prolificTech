@@ -1,4 +1,4 @@
-import { ADMIN_UPDATE_USER_ERROR_MESSAGE, ADMIN_UPDATE_USER_REFRESH, ADMIN_UPDATE_USER_SUCCESS, DELETE_USER_FAILED, DELETE_USER_SUCCESS, GET_USER_BY_ID, GET_USER_BY_ID_ERROR, LOGIN_USER, LOGIN_USER_FAILED, LOGOUT_USER, REFRESH_ERROR_MESSAGE, REGISTER_USER_FAILED, REGISTER_USER_SUCCESS, SET_DELETE_USER_REFRESH, SET_LOADING, SET_REGISTER_USER_REFRESH, SET_USER_LIST, SET_USER_LIST_ERROR } from './types'
+import { ADMIN_UPDATE_USER_ERROR_MESSAGE, ADMIN_UPDATE_USER_REFRESH, ADMIN_UPDATE_USER_SUCCESS, DELETE_USER_FAILED, DELETE_USER_SUCCESS, GET_USER_BY_ID, GET_USER_BY_ID_ERROR, LOGIN_USER, LOGIN_USER_FAILED, LOGOUT_USER, REFRESH_ERROR_MESSAGE, REGISTER_USER_FAILED, REGISTER_USER_SUCCESS, SET_DELETE_USER_REFRESH, SET_LOADING, SET_REGISTER_USER_REFRESH, SET_USER_LIST, SET_USER_LIST_ERROR, UPDATE_USER_FAILED, UPDATE_USER_SUCCESS } from './types'
 
 export default (state,action) => {
     switch (action.type) {
@@ -122,6 +122,20 @@ export default (state,action) => {
                 ...state,
                 loading: false,
                 adminUpdateUserErrorMessage: action.payload
+            }
+        case UPDATE_USER_FAILED:
+            console.log('into error',action.payload);
+            return{
+                ...state,
+                loading: false,
+                updateUserErrorMessage: action.payload
+            }
+        case UPDATE_USER_SUCCESS:
+            
+            return{
+                ...state,
+                updateUserStatus: true,
+                loading: false
             }
         default:
             return state

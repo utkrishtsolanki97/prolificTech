@@ -2,6 +2,15 @@ import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 import shortid from 'shortid'
 import Razorpay from 'razorpay'
+import nodemailer from 'nodemailer'
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'prolifictechshopofficial@gmail.com',
+    pass: 'ProlificTech1#',
+  }
+  });
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -169,6 +178,25 @@ const getRazorpayId = asyncHandler( async(req, res) => {
     
 })
 
+  const sendmail = () => {
+    
+    
+      const mailData = {
+          from: 'prolifictechshopofficial@gmail.com',  // sender address
+          to: 'utkrishtsolanki97@gmail.com',   // list of receivers
+          subject: 'Sending Email using Node.js',
+          text: 'That was easy!',
+          html: '<><b>Hey there! </b><br> This is our first message sent with Nodemailer<br/></>',
+        };
+
+        transporter.sendMail(mailData, function (err, info) {
+          if(err)
+            console.log(err)
+          else
+            console.log(info);
+        });
+  }
+
 
 export {
     addOrderItems,
@@ -178,4 +206,5 @@ export {
     getRazorpayId,
     getOrders,
     updateOrderToDelivered,
+    sendmail,
 }

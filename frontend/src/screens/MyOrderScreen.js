@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import OrderContext from '../context/Orders/OrderContext'
 
 const MyOrderScreen = () => {
@@ -14,6 +15,9 @@ const MyOrderScreen = () => {
     }, [])
     return (
         <>
+        <Link className='btn btn-light my-3' to='/profile' >
+            Go Back
+        </Link>
             <h2>My Orders</h2>
         
           <Table striped bordered hover responsive className='table-sm'>

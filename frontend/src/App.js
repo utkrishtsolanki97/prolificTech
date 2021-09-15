@@ -24,6 +24,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import MyOrderScreen from './screens/MyOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   if(localStorage.getItem('userDetails')){
@@ -52,6 +53,7 @@ function App() {
           <Route path='/myOrders' component={MyOrderScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/register' component={SignupScreen} />
+          <Route path='/profile' component={ProfileScreen} />
           <Route path="/cart/:id?" component={Cart} />
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />

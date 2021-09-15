@@ -30,3 +30,29 @@
 .product-placement {
     display: grid;
 }
+.product-grid{
+    .my-3.p-3.rounded.card {
+        height: 350px;
+        .product-image{
+            height: 210px; /* Can be anything */
+            width: 210px; /* Can be anything */
+            position: relative;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+        }
+        .card-title{
+            height: 48px;
+        }
+    }
+    
+}

@@ -122,25 +122,32 @@ const updateUserProfile = asyncHandler( async(req, res) => {
         "Origin, X-Requested-With, Content-Type, Accept"
     );
     const user = await User.findById(req.User._id)
+    console.log(req.body);
     if(user){
-        user.name = req.body.name || user.name
-        user.email = req.body.email || user.email
-        if(req.body.password){
-        user.password = req.body.password 
+        user.name = req.body.updatedUser.name || user.name
+        user.email = req.body.updatedUser.email || user.email
+        user.deliveryAddress = req.body.updatedUser.deliveryAddress || user.deliveryAddress
+        if(req.body.updatedUser.password){
+        user.password = req.body.updatedUser.password 
         }
-        user.phone_number = req.body.phone_number || user.phone_number
+        user.phone_number = req.body.updatedUser.phone_number || user.phone_number
+        
+        
 
         const updatedUser = await user.save()
 
-        return res.json({
-            _id: updatedUser._id,
-            name: updatedUser.name,
-            email: updatedUser.email,
-            phone_number: updatedUser.phone_number,
-            isAdmin: updatedUser.isAdmin,
-            isSeller: updatedUser.isSeller,
-            token: generateToken(updatedUser._id)
-        })
+        if(updatedUser){
+            return res.json({
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                phoneNumber: updatedUser.phoneNumber,
+                gender: updatedUser.gender,
+                isAdmin: updatedUser.isAdmin,
+                deliveryAddress: updatedUser.deliveryAddress,
+                token: generateToken(updatedUser._id)
+            })
+        }
         }
     else{
         res.status(404)

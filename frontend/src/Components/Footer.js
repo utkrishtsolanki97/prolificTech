@@ -6,12 +6,12 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import './Footer.css'
+import './Footer.scss'
 
 const Footer = () => {
     return (
         <footer>
-            <Container>
+            <Container className="footerCss">
                 <Row>
                     <Col md={4} sm={12} xs={12}>
                         <a href='https://prolifictech.in' target="_blank" rel="noreferrer"><img src={Logo} alt='logo' width='150px' height='90px' /></a>

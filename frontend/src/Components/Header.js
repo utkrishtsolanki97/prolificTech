@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {  Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logocorrect.svg'
 import { LinkContainer } from 'react-router-bootstrap'
-import './Header.css'
+import './Header.scss'
 import UserContext from '../context/Users/UserContext'
 
 const Header = () => {
@@ -23,8 +23,9 @@ const Header = () => {
     return (
         <header>
             <Navbar bg="light" expand="lg">
-                
-                <Navbar.Brand href="/"><img src={Logo} alt='ProlificTech' width='89px' height='55.px' /> </Navbar.Brand>
+                <div >
+                    <Navbar.Brand className="navLogo" href="/"><img src={Logo} alt='ProlificTech'  /> </Navbar.Brand>
+                </div>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

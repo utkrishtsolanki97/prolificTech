@@ -9,7 +9,6 @@ import ProductScreen from './screens/ProductScreen';
 import Cart from './screens/Cart';
 import SignInScreen from './screens/SignInScreen';
 import SignupScreen from './screens/SignupScreen';
-
 import UploadProducts from './screens/UploadProducts';
 import UserState from './context/Users/UserState';
 import UserListScreen from './screens/UserListScreen';
@@ -25,6 +24,13 @@ import MyOrderScreen from './screens/MyOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import CouponCodes from './screens/CouponCodes';
+import AdminScreen from './screens/AdminScreen';
+import CouponState from './context/Coupons/CouponState';
+import PrivacyPolicy from './screens/PrivacyPolicy';
+import RefundCancellationPolicy from './screens/RefundCancellationPolicy';
+import TermsAndCondition from './screens/TermsAndCondition';
+import ContactUs from './screens/ContactUs';
 
 function App() {
   if(localStorage.getItem('userDetails')){
@@ -62,6 +68,12 @@ function App() {
           <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
           <Route path='/admin/uploadproducts' component={UploadProducts} />
           <Route path='/admin/orderlist' component={OrderListScreen} />
+          <Route path='/admin/adminscreen' component={AdminScreen} />
+          <Route path='/admin/coupon' component={CouponCodes} />
+          <Route path='/privacy-policy' component={PrivacyPolicy} exact />
+          <Route path='/refund-cancellation-policy' component={RefundCancellationPolicy} exact />
+          <Route path='/terms-conditions' component={TermsAndCondition} exact />
+          <Route path='/contact-us' component={ContactUs} exact />
           <Route path='/' component={AllProductsScreen} exact />
           <Route path='/product/:id' component={ProductScreen} />
         </main>
@@ -74,9 +86,11 @@ function App() {
       <ProductState>
         <UserState>
           <OrderState>
-            <div className="App">
-              {routes}
-            </div>
+            <CouponState>
+              <div className="App">
+                {routes}
+              </div>
+            </CouponState>
           </OrderState>
         </UserState>
       </ProductState>

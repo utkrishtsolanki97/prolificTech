@@ -1,0 +1,72 @@
+.date-range-container{
+    display: block;
+    background-color: white;
+    padding: 30px;
+    max-width: 380px;
+    box-shadow: 2px 2px 4px 1px black;
+    .custom-date-range-form{
+        margin-top: 30px;
+    }
+    .from-date-container,
+    .to-date-container{
+        margin-bottom: 32px;
+        label{
+            display: flex;
+            color: black;
+            font-size: 14px;
+        }
+        .react-datepicker-wrapper{
+            width: 100%;
+        }
+        .react-datepicker-wrapper,
+        .react-datepicker__input-container,
+        .react-datepicker__input-container input {
+            display: block;
+            width: 100%;
+        }
+        .react-datepicker__input-container{
+            input{
+                border: 0;
+                border-bottom: 1px solid;
+                width: 100%;
+                padding: 0 0 15px 0;
+                font-size: 14px;
+            }
+        }
+        input[type="date"]{
+            border: 0;
+            border-bottom: 1px solid;
+            width: 100%;
+            padding: 0 0 15px 0;
+            font-size: 14px;
+            &:focus-visibe{
+                border: 0;
+                border-bottom: 1px solid;
+            }
+        } 
+        .date-range-btn{
+            background-color: black;
+            color: white;
+            padding: 5px 30px;
+            margin: 10px 0 5px 0;
+            border-color: black;
+            &:hover{
+                background-color: grey;
+                color: white;
+                border-color: black;
+            }
+            &:disabled{
+                background-color: lightgray;
+            }
+        }
+    }
+}
+.react-datepicker-wrapper{
+    width: 100%;
+}
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 100%;
+}

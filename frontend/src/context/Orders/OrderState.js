@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useReducer } from 'react'
 import OrderContext from './OrderContext'
 import OrderReducer from './OrderReducer'
-import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS, UPDATE_CART } from './type'
+import {  ADD_NEW_ORDER_FAILED, ADD_NEW_ORDER_REFRESH, ADD_NEW_ORDER_SUCCESS, GET_ALL_ORDERS, GET_RAZORPAY_ORDER_ID, GET_SINGLE_ORDERS, SET_ADDRESS, SET_CART_TOTAL, SET_LOADING, SET_ORDER_TO_DELIVERED, SET_PAYMENT_METHOD, SET_PAYMENT_STATUS, UPDATE_CART } from './type'
 
 const OrderState = (props) => {
 
@@ -223,6 +223,32 @@ const OrderState = (props) => {
             console.log(res.data);
             dispatch({
                 type: GET_ALL_ORDERS,
+                payload: res.data,  
+            })
+            
+        } catch (error) {
+            
+            console.log(error.response);
+            // dispatch({
+            //     type: ADMIN_UPDATE_PRODUCT_ERROR_MESSAGE,
+            //     payload:  errorMsg,  
+            // })
+        }
+    }
+
+    const deliverOrderHamdler = async(id) =>{
+        const user = JSON.parse(atob(localStorage.getItem('userDetails')))
+        setLoading()
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                },
+              }
+            const res = await axios.get(`/api/order/${id}/deliver`,config);
+            console.log(res.data);
+            dispatch({
+                type: SET_ORDER_TO_DELIVERED,
                 payload: res.data,  
             })
             

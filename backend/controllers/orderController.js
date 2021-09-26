@@ -114,11 +114,14 @@ const addOrderItems = asyncHandler(async (req, res) => {
   // @route   GET /api/orders/:id/deliver
   // @access  Private/Admin
   const updateOrderToDelivered = asyncHandler(async (req, res) => {
+    console.log('hey');
+    console.log(req);
     const order = await Order.findById(req.params.id)
-  
+    console.log(order);
+    console.log('hey');
     if (order) {
-      order.isDelivered = true
-      order.deliveredAt = Date.now()
+      order.is_delivered = true
+      order.delivered_at = Date.now()
   
       const updatedOrder = await order.save()
   

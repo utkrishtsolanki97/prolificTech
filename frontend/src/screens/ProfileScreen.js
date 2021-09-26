@@ -81,6 +81,19 @@ const ProfileScreen = ({history}) => {
         userContext.updateUser(user)
         // userContext.userRegister(name,phone,gender,email,password)
       }
+    const deleteAddressHandler = (e) => {
+        e.preventDefault();
+        const index = e.target.value
+        console.log(e.target.value);
+        const update = JSON.parse(atob(localStorage.getItem('userDetails')))
+        console.log(update);
+        let tempAddress = update.deliveryAddress
+        console.log(tempAddress);
+        update.deliveryAddress.splice(index,1)
+        console.log(tempAddress);
+        userContext.updateUser(update)
+        setUserDetails(update)
+    }
     return (
         <div className="profileScreen">
             
@@ -113,10 +126,16 @@ const ProfileScreen = ({history}) => {
                     </div>
                 )  : addresses ? (
                     <div className="addressesScreen">
+                        
                         <div className='btn btn-light my-3' onClick={e => {setAddresses(false); setMainScreen(true)}} >
                             Go Back
                         </div>
                         <br />
+                        <div className="mAccountHeaading">
+                            <h2>My Addresses</h2>
+                            <hr />
+                        </div>
+                        <br/><br/><br/>
                         <Row >
                             {
                                 userDetails.deliveryAddress.map((address,index)=>(
@@ -127,8 +146,8 @@ const ProfileScreen = ({history}) => {
                                         <p><b>Mob:</b> {address.phoneNumber}</p>
                                         {/* <Button key={index} value={index} >Deliver to this address</Button> */}
                                         <Row>
-                                            <Col sm={6} md={6}><Button style={{width:'100%'}}  variant="outline-secondary">Edit</Button></Col>
-                                            <Col sm={6} md={6}><Button style={{width:'100%'}}  variant="outline-secondary">Delete</Button></Col>
+                                            <Col sm={6} md={6}><Button style={{width:'100%'}} value={index} variant="outline-secondary">Edit</Button></Col>
+                                            <Col sm={6} md={6}><Button style={{width:'100%'}} value={index} onClick={deleteAddressHandler} variant="outline-secondary">Delete</Button></Col>
                                         </Row>
                                     </Card>
                                 </Col>
@@ -248,10 +267,17 @@ const ProfileScreen = ({history}) => {
                     </div>
                 ) : (
                     <div>
+                        
+                        <br/>
                         <div className='btn btn-light my-3' onClick={e => {setMainScreen(true)}} >
                             Go Back
                         </div>
                         <br />
+                        <div className="mAccountHeaading">
+                            <h2>My Profile</h2>
+                            <hr />
+                        </div>
+                        <br/><br/><br/>
                         <Form onSubmit={submitHandler}>
                             <Form.Group controlId='name'>
                                 <Form.Label>Name</Form.Label>

@@ -31,6 +31,7 @@
     display: grid;
 }
 .product-grid{
+    @media (min-width: 992px) {
     .my-3.p-3.rounded.card {
         height: 350px;
         .product-image{
@@ -54,5 +55,5 @@
             height: 48px;
         }
     }
-    
+}
 }

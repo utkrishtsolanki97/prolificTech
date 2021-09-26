@@ -7,14 +7,14 @@ import './Product.scss'
 
 const Product = ({ product }) => {
     const discount = (((product.actualPrice-product.discountedPrice)/product.actualPrice)*100).toFixed(2)
-    console.log(product.images[0].url.height);
+    // console.log(product.images[0].url.height);
   return (
     <div className="product-grid">
       <Card className='my-3 p-3 rounded'>
         <div className="product-image">
           <Link to={`/product/${product._id}`}>
               
-              {product.images.length>=1  ?  <Card.Img className="image" src={product.images[0].url}  /> : <Card.Img src={errorImage} variant='top' /> }
+              {product.images && product.images.length>=1  ?  <Card.Img className="image" src={product.images[0].url}  /> : <Card.Img src={errorImage} variant='top' /> }
             
           </Link>
         </div>
@@ -22,7 +22,7 @@ const Product = ({ product }) => {
         <Card.Body>
           <Link to={`/product/${product._id}`}>
             <Card.Title as='div'>
-              <strong>{product.productName.substring(0,35)}</strong>
+              <strong>{product.productName.length < 35 ? product.productName : product.productName.substring(0,35)+'...'}</strong>
             </Card.Title>
           </Link>
 

@@ -7,6 +7,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import './Footer.scss'
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -24,11 +25,10 @@ const Footer = () => {
                         <a href='https://www.linkedin.com/company/prolifictechtutorial/' target="_blank" rel="noreferrer"><LinkedInIcon/> </a>
                     </Col>
                    <Col md={4} sm={12} xs={12}>
-                       <h1>Popular Courses</h1>
-                       <a href='https://prolifictech.in/all-courses-2/' target="_blank" rel="noreferrer">Android App Development</a><br/>
-                       <a target="_blank" rel="noreferrer" href='https://prolifictech.in/all-courses-2/'>Game Development</a><br/>
-                       {/* // eslint-disable-next-line */}
-                       <a target="_blank" rel="noreferrer" href='https://prolifictech.in/all-courses-2/'>Virtual Robotics</a><br/>
+                       <h1>Useful Links</h1>
+                       <Link to='/refund-cancellation-policy'><b>Refund and Cancelation</b></Link><br />
+                       <Link to='/privacy-policy'><b>Privacy Policy</b></Link><br />
+                       <Link to='/terms-conditions'><b>Terms & Conditions</b></Link><br />
                    </Col>
                    <Col md={4} sm={12} xs={12}>
 

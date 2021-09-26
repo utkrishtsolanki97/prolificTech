@@ -59,7 +59,7 @@ const OrderScreen = ({ match, history }) => {
                 </p>}
                 {orderContext.selectedOrder.is_delivered ? (
                   <Alert variant='success'>
-                    Delivered on {orderContext.selectedOrder.deliveredAt}
+                    Delivered on {orderContext.selectedOrder.delivered_at.substring(0, 10)}
                   </Alert>
                 ) : (
                   <Alert variant='danger'>Not Delivered</Alert>

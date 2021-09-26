@@ -5,10 +5,12 @@ import ProductContext from '../context/Products/productContext'
 import errorImage from '../assets/error-image-generic.png'
 import OrderContext from '../context/Orders/OrderContext'
 import './Cart.scss'
+import CouponContext from '../context/Coupons/CouponContext'
 
 const Cart = ({ match, location, history }) => {
     const productContext = useContext(ProductContext)
     const orderContext = useContext(OrderContext)
+    const couponContext = useContext(CouponContext)
     const productId = match.params.id
     console.log(productId);
 
@@ -16,6 +18,8 @@ const Cart = ({ match, location, history }) => {
     const [tax, setTax] = useState(0)
     const [shipping, setShipping] = useState(0)
     const [totalPayable, setTotalPayable] = useState(0)
+    const [coupon, setCoupon] = useState('')
+    const [couponDiscount, setCouponDiscount] = useState(0)
 
     useEffect(()=>{
       const cart  = parseFloat(productContext.cart.reduce((acc, item) => acc + item.quantity * item.discountedPrice, 0).toFixed(2))
@@ -25,7 +29,7 @@ const Cart = ({ match, location, history }) => {
       const ship = cart > 1000 ? 0 : cart===0 ? 0 : 80
       setShipping(ship)
       console.log(typeof(cart));
-      let total = (taxapplicable + cart +ship)
+      let total = (cart +ship)
       // total = total.toFixed(2)
       setTotalPayable(total)
     },[productContext.cart])
@@ -54,6 +58,16 @@ const Cart = ({ match, location, history }) => {
       orderContext.setTotal(price)
       history.push('/login?redirect=shipping')
     }
+
+    const handleCouponCode = () => {
+      couponContext.checkCoupon(coupon)
+    }
+
+    useEffect(()=>{
+      if(couponContext.couponDetails){
+        setCouponDiscount(couponContext.couponDetails.discountPercentage)
+      }
+    },[couponContext.couponDetails])
   
     return (
       <Row className="cartCss">
@@ -125,8 +139,9 @@ const Cart = ({ match, location, history }) => {
                   placeholder="Enter Code Here"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
+                  onChange={e=> setCoupon(e.target.value)}
                 />
-                <Button type='button'>APPLY</Button>
+                <Button onClick={handleCouponCode} type='button'>APPLY</Button>
               </ListGroup.Item>
               <ListGroup.Item>
                 <h6 className="detail-left">Cart Total</h6>

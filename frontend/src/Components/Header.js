@@ -35,10 +35,10 @@ const Header = () => {
                     <LinkContainer to='/'>
                         <Nav.Link >Home</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to='/about'>
+                    {/* <LinkContainer to='/about'>
                         <Nav.Link >About Us</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to='/contact'>
+                    </LinkContainer> */}
+                    <LinkContainer to='/contact-us'>
                         <Nav.Link >ContactUs</Nav.Link>
                     </LinkContainer>
                     

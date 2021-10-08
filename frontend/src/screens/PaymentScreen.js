@@ -96,7 +96,7 @@ const PaymentScreen = ({history}) => {
             "prefill": {
                 "name": user.name,
                 "email": user.email,
-                "contact": "9999999999"
+                // "contact": "9999999999"
             },
             "notes": {
                 "address": "Razorpay Corporate Office"

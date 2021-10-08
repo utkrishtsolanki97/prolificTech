@@ -153,7 +153,10 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getRazorpayId = asyncHandler( async(req, res) => {
-    var razorpay = new Razorpay({ key_id: process.env.razorpay_test_key, key_secret: process.env.razorpay_test_secret })
+  const key = process.env.NODE_ENV === 'development' ? process.env.razorpay_test_key : process.env.razorpay_prod_key
+  const password = process.env.NODE_ENV === 'development' ? process.env.razorpay_test_secret : process.env.razorpay_prod_secret
+  console.log(key,'-',password);
+    var razorpay = new Razorpay({ key_id: key, key_secret: password })
     const {
         amount,
         currency,
@@ -171,8 +174,8 @@ const getRazorpayId = asyncHandler( async(req, res) => {
 			id: response.id,
 			currency: response.currency,
 			amount: response.amount,
-            receipt: response.receipt,
-            created_at: response.created_at,
+      receipt: response.receipt,
+      created_at: response.created_at,
 		})
 	} catch (error) {
 		console.log(error)

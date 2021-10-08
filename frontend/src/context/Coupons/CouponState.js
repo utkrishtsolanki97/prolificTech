@@ -137,6 +137,8 @@ const CouponState = (props) => {
             couponAddErrorMessage: state.couponAddErrorMessage,
             deleteCoupon,
             checkCoupon,
+            couponDetails: state.couponDetails,
+            couponCodeError: state.couponCodeError
         }}>
             {props.children}
         </CouponContext.Provider>

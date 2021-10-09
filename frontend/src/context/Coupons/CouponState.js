@@ -111,7 +111,6 @@ const CouponState = (props) => {
                 type: GET_COUPON_STATUS_SUCCESS,         
                 payload: res.data,  
             })
-            getAllCoupons()
         } catch (error) {
             console.log(error.message);
             dispatch({

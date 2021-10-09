@@ -32,6 +32,7 @@ const CouponCodes = () => {
     const [endDate, setEndDate] = useState()
     const [code, setCode] = useState('')
     const [discountPercentage, setDiscountPercentage] = useState(0)
+    const [max_discount, setMax_discount] = useState(0)
     const handleDate = (e) =>{
         e.preventDefault()
         let x = {}
@@ -41,6 +42,7 @@ const CouponCodes = () => {
         x.created_on = moment(new Date).format("YYYY-MM-DDTHH:mm:ssZ")
         x.created_by = user._id
         x.discountPercentage = discountPercentage
+        x.max_discount = max_discount
         console.log(x);
         couponContext.createCoupon(x)
     }
@@ -57,6 +59,10 @@ const CouponCodes = () => {
                     <div className='coupon-container'>
                         <label>Percentage Discount:</label>
                         <input type='number' value={discountPercentage} onChange={e=> setDiscountPercentage(e.target.value)} />
+                    </div>
+                    <div className='coupon-container'>
+                        <label>Max Discount:</label>
+                        <input type='number' value={max_discount} onChange={e=> setMax_discount(e.target.value)} />
                     </div>
                     <div className="from-date-container">
                         <label>From: </label>
@@ -79,6 +85,7 @@ const CouponCodes = () => {
               <th>ID</th>
               <th>CODE</th>
               <th>PERCENTAGE</th>
+              <th>MAX DISCOUNT</th>
               <th>ISSUE ON</th>
               <th>VALID TILL</th>
               <th></th>
@@ -90,6 +97,7 @@ const CouponCodes = () => {
                     <td>{index+1}.</td>
                     <td>{coupon.couponCode}</td>
                     <td>{coupon.discountPercentage}</td>
+                    <td>{coupon.max_discount}</td>
                     <td>{coupon.valid_from.substring(0,10)}</td>
                     <td>{coupon.valid_till.substring(0,10)} </td>
                     <td><Button

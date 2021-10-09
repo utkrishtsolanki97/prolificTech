@@ -22,6 +22,9 @@ const couponSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    max_discount : {
+        type: Number,
+    },
 },{
     timestamp: true
 })

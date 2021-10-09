@@ -54,6 +54,7 @@ const createCoupon = asyncHandler(async (req, res) => {
     created_by: req.body.created_by,
     created_on: Date.now(),
     discountPercentage: req.body.discountPercentage,
+    max_discount: req.body.max_discount,
   })
 
   const createdCoupon = await coupon.save()

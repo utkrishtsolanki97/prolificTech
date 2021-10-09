@@ -7,11 +7,13 @@
     .bg-light {
         padding-left: 40px;
     }
-    .right.navbar-nav {
-    margin-left: 46%;
-    }
+    
     img {
         height: 60px;
+    }
+    .navbar-collapse{
+        justify-content: space-between;
+        margin-right: 10%;
     }
 }
 .navLogo{

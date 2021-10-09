@@ -30,7 +30,8 @@ export default (state,action) => {
             return{
                 ...state,
                 loading: false,
-                couponDetails: action.payload
+                couponDetails: action.payload,
+                couponCodeError: ''
             }
         case GET_COUPON_STATUS_FAILED:
             return{

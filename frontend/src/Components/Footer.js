@@ -11,10 +11,11 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer>
+        <footer >
+            <div className='footer-background'>
             <Container className="footerCss">
                 <Row>
-                    <Col md={4} sm={12} xs={12}>
+                    <Col className='description' md={4} sm={12} xs={12}>
                         <a href='https://prolifictech.in' target="_blank" rel="noreferrer"><img src={Logo} alt='logo' width='150px' height='90px' /></a>
                         
                         <p>Prolific Tech is a diversified establishment that provides several preparatory and specialized courses for K-12 students and professionals of Robotics & Coding and also lays a strong foundation of STEAM, Robotic Labs, Maker Spaces in schools. Lets Build!</p>
@@ -35,11 +36,11 @@ const Footer = () => {
                         <h1>Contact Info</h1>
                         <p><b>Address</b></p>
                         <p>Plot No. 26&27, Qutub Vihar ph-1, New Delhi-110071</p>
-                        <br/>
+                        {/* <br/> */}
                         <p><b>Phone</b></p>
                         <p>+91 9311541528</p>
                         <p>+91 8512879361</p>
-                        <br/>
+                        {/* <br/> */}
                         <p><b>Email</b></p>
                         <p>Infoprolifictech@gmail.com</p>
                     </Col>
@@ -48,6 +49,7 @@ const Footer = () => {
                     <Col className='text-center py-3'>Copyright &copy; ProlificTech</Col>
                 </Row>
             </Container>
+            </div>
         </footer>
     )
 }

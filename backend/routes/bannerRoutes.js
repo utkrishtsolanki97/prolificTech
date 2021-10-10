@@ -1,8 +1,8 @@
 import express from 'express'
+import { getallBanner } from '../controllers/bannerController.js';
 const router = express.Router()
-import {  getUsers } from '../controllers/userController.js';
 import { protect, admin } from '../middlewear/authMiddlewear.js';
 
-router.route('/').put(protect, admin, getUsers)
+router.route('/').get(getallBanner)
 
 export default router

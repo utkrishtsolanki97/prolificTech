@@ -8,6 +8,7 @@ import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import couponRoutes from './routes/couponRoutes.js'
+import bannerRoutes from './routes/bannerRoutes.js'
 
 dotenv.config()
 connectDB()
@@ -51,6 +52,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/order',orderRoutes)
 app.use('/api/coupon',couponRoutes)
+app.use('/api/banner',bannerRoutes)
 
 const PORT = process.env.PORT
 

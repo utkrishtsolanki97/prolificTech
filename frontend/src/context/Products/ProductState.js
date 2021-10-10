@@ -2,12 +2,13 @@ import axios from 'axios'
 import React, { useReducer } from 'react'
 import productContext from './productContext'
 import ProductReducer from './ProductReducer'
-import { ADD_INTO_EXISTING, ADD_NEW_PRODUCT_FAILED, ADD_NEW_PRODUCT_INTO_CART, ADD_NEW_PRODUCT_REFRESH, ADD_NEW_PRODUCT_SUCCESS, ADMIN_UPDATE_PRODUCT_ERROR_MESSAGE, ADMIN_UPDATE_PRODUCT_REFRESH, ADMIN_UPDATE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILED, DELETE_PRODUCT_SUCCESS, GET_ALL_PRODUCTS, GET_SINGLE_PRODUCTS, REMOVE_PRODUCT_FROM_CART, SET_DELETE_PRODUCT_REFRESH, SET_LOADING } from './type'
+import { ADD_INTO_EXISTING, ADD_NEW_PRODUCT_FAILED, ADD_NEW_PRODUCT_INTO_CART, ADD_NEW_PRODUCT_REFRESH, ADD_NEW_PRODUCT_SUCCESS, ADMIN_UPDATE_PRODUCT_ERROR_MESSAGE, ADMIN_UPDATE_PRODUCT_REFRESH, ADMIN_UPDATE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILED, DELETE_PRODUCT_SUCCESS, GET_ALL_BANNER, GET_ALL_PRODUCTS, GET_SINGLE_PRODUCTS, REMOVE_PRODUCT_FROM_CART, SET_DELETE_PRODUCT_REFRESH, SET_LOADING } from './type'
 
 const ProductState = (props) => {
 
     const initialState = {
         products: [],
+        banner: [],
         loading: false,
         product: {},
         cart: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
@@ -40,6 +41,20 @@ const ProductState = (props) => {
             //     type: GET_ALL_PRODUCTS,
             //     payload: res.data,  
             // })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    const getBanners = async () => {
+        setLoading()
+
+        try {
+            const res = await axios.get('/api/banner');
+            console.log('For all products',res.data);
+            dispatch({
+                type: GET_ALL_BANNER,
+                payload: res.data,  
+            })
         } catch (error) {
             console.log(error.message);
         }
@@ -195,9 +210,11 @@ const ProductState = (props) => {
     return (
         <productContext.Provider value={{
             getAllProducts,
+            getBanners,
             getProduct,
             loading: state.loading,
             allproducts: state.products,
+            banner: state.banner,
             product: state.product,
             addProductToCart,
             removeProductFromCart,

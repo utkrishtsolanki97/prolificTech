@@ -16,6 +16,7 @@
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix frontend && npm run build --prefix frontend"
   },
+  "heroku-run-build-script": true,
   "author": "Utkrisht Solanki",
   "license": "MIT",
   "dependencies": {

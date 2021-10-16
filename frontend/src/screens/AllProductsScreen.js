@@ -53,6 +53,34 @@ const AllProductsScreen = () => {
                 </>}
             {/* </div> */}
             <br />
+            <div className='secondary-banner'>
+                <div class="container-fluid">
+                    <div class="row flex-row flex-nowrap">
+                        {productContext.banner && productContext.banner[0] && productContext.banner[0].banner2 && <>
+                            
+                            {productContext.banner[0].banner2.map((banner,index)=>{
+                                return (
+                                <div class="col-6 col-md-3" key={index}>
+                                    <div class="card card-block">
+                                        <h6><b>{banner.shortDesc}</b></h6>
+                                        <Link to={`/product/${banner.url}`} >
+                                            <img
+                                            className="d-block w-100 h-100"
+                                            src={banner.image}
+                                            alt="First slide"
+                                            />
+                                        </Link>
+                                    </div>
+                                    
+                                </div>
+                                )
+                            })}
+                        </>}
+                        
+                    </div>
+                </div>
+            </div>
+            <br />
             <h3>All products</h3>
             
             <>

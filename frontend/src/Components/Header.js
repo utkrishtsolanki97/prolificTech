@@ -4,6 +4,8 @@ import Logo from '../assets/logocorrect.svg'
 import { LinkContainer } from 'react-router-bootstrap'
 import './Header.scss'
 import UserContext from '../context/Users/UserContext'
+import SearchBox from './SearchBox'
+import { Route } from 'react-router-dom'
 
 const Header = () => {
     const userContext = useContext(UserContext)
@@ -59,8 +61,12 @@ const Header = () => {
                             <LinkContainer to='/admin/coupon'>
                                 <NavDropdown.Item>Coupons</NavDropdown.Item>
                             </LinkContainer>
+                            {/* <LinkContainer to='/admin/banner'>
+                                <NavDropdown.Item>Banner</NavDropdown.Item>
+                            </LinkContainer> */}
                         </NavDropdown>
                     )}
+                    <Route  render={({history})=> <SearchBox history={history} />} />
                     </Nav>
                     {/* <Form className="d-flex">
                     <FormControl
@@ -72,6 +78,7 @@ const Header = () => {
                     <Button variant="outline-secondary">Search</Button>
                     </Form> */}
                     <Nav className="right">
+                        
                         <LinkContainer to='/cart'>
                             <Nav.Link>
                                 <i className='fas fa-shopping-cart'></i> Cart

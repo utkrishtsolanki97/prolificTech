@@ -33,6 +33,8 @@ const OrderScreen = ({ match, history }) => {
 
   const deliverHandler = () => {
     // dispatch(deliverOrder(order))
+    orderContext.deliverOrderHamdler(orderId)
+    window.location.reload()
   }
 
   

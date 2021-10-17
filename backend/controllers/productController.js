@@ -7,7 +7,14 @@ const getProduct = asyncHandler( async(req, res) => {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     );
-    const products = await Product.find({})
+    const keyword = req.query.keyword ? {
+      productName:{
+        $regex: req.query.keyword,
+        $options:'i'
+      }
+    } : {}
+    console.log(keyword);
+    const products = await Product.find({ ...keyword })
     res.json(products)
     // res.json(Products)
 })

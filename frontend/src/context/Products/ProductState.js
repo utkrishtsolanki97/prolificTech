@@ -24,11 +24,11 @@ const ProductState = (props) => {
 
     const [state, dispatch] = useReducer(ProductReducer, initialState)
 
-    const getAllProducts = async () => {
+    const getAllProducts = async (keyword='') => {
         setLoading()
 
         try {
-            const res = await axios.get('/api/products');
+            const res = await axios.get(`/api/products?keyword=${keyword}`);
             console.log('For all products',res.data);
             dispatch({
                 type: GET_ALL_PRODUCTS,

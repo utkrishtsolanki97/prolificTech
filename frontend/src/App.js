@@ -2,6 +2,7 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+// import {browserHistory} from 'react-router';
 import { Container } from 'react-bootstrap';
 import ProductState from './context/Products/ProductState';
 import AllProductsScreen from './screens/AllProductsScreen';
@@ -31,6 +32,8 @@ import PrivacyPolicy from './screens/PrivacyPolicy';
 import RefundCancellationPolicy from './screens/RefundCancellationPolicy';
 import TermsAndCondition from './screens/TermsAndCondition';
 import ContactUs from './screens/ContactUs';
+import BannerListScreen from './screens/BannerListScreen';
+import SearchScreen from './screens/SearchScreen';
 
 function App() {
   if(localStorage.getItem('userDetails')){
@@ -70,11 +73,13 @@ function App() {
           <Route path='/admin/orderlist' component={OrderListScreen} />
           <Route path='/admin/adminscreen' component={AdminScreen} />
           <Route path='/admin/coupon' component={CouponCodes} />
+          <Route path='/admin/banner' component={BannerListScreen} />
           <Route path='/privacy-policy' component={PrivacyPolicy} exact />
           <Route path='/refund-cancellation-policy' component={RefundCancellationPolicy} exact />
           <Route path='/terms-conditions' component={TermsAndCondition} exact />
           <Route path='/contact-us' component={ContactUs} exact />
           <Route path='/' component={AllProductsScreen} exact />
+          <Route path='/search/:keyword' component={SearchScreen} />
           <Route path='/product/:id' component={ProductScreen} />
         </main>
       </Container>

@@ -245,7 +245,8 @@ const OrderState = (props) => {
                     Authorization: `Bearer ${user.token}`
                 },
               }
-            const res = await axios.get(`/api/order/${id}/deliver`,config);
+              console.log(config);
+            const res = await axios.put(`/api/order/${id}/deliver`,{},config);
             console.log(res.data);
             dispatch({
                 type: SET_ORDER_TO_DELIVERED,
@@ -284,6 +285,7 @@ const OrderState = (props) => {
             selectedOrder: state.selectedOrder,
             getSelectedOrder,
             getadminOrders,
+            deliverOrderHamdler,
         }}>
             {props.children}
         </OrderContext.Provider>

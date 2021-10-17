@@ -5,8 +5,7 @@ import ProductContext from '../context/Products/productContext'
 import backgroundimage from '../assets/banner.png'
 import { Link } from 'react-router-dom'
 
-const AllProductsScreen = ({match}) => {
-    const keyword = match.params.keyword
+const AllProductsScreen = ({}) => {
     const productContext = useContext(ProductContext)
 
     const [index, setIndex] = useState(0);
@@ -22,10 +21,6 @@ const AllProductsScreen = ({match}) => {
         }
          // eslint-disable-next-line
     }, [])
-    useEffect(() => {
-            productContext.getAllProducts(keyword)
-         // eslint-disable-next-line
-    }, [keyword])
 
     // useEffect(() => {
     //     console.log('into screen',productContext.allproducts);

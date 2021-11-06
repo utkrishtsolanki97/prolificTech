@@ -35,7 +35,7 @@ const BannerListScreen = () => {
                 return(
               <tr key={index+1}>
                 <td>{index+1}</td>
-                <td><img src={banner.url} alt={banner.image} /></td>
+                <td><img src={banner.image} alt={banner.image} /></td>
                 <td>{banner.url}</td>
                 <td>{banner.user}</td>
                 <td>{banner.created_on.substring(0, 10)}</td>

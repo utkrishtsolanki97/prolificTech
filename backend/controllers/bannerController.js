@@ -38,23 +38,25 @@ const getallBanner = asyncHandler( async(req, res) => {
   
 
 // @desc    Create a coupon
-// @route   POST /api/coupon
+// @route   PUT /api/banner
 // @access  Private/Admin
-// const createCoupon = asyncHandler(async (req, res) => {
-//   // console.log(req);
-//   const coupon = new Coupon({
-//     couponCode: req.body.couponCode,
-//     valid_from: req.body.valid_from,
-//     valid_till: req.body.valid_till,
-//     created_by: req.body.created_by,
-//     created_on: Date.now(),
-//     discountPercentage: req.body.discountPercentage,
-//     max_discount: req.body.max_discount,
-//   })
-
-//   const createdCoupon = await coupon.save()
-//   res.status(201).json(createdCoupon)
-// })
+const updateBanner = asyncHandler(async (req, res) => {
+  // console.log(req);
+  let banner = await Banner.findById('6165cb1c12a14f9c06b0ce06')
+    if (banner) {
+      console.log(req.body);
+      const bannernew= req.body.updatebanner
+      banner.banner1=bannernew.banner1
+      banner.banner2=bannernew.banner2
+      console.log(banner);
+      const updatedBanner = await banner.save()
+  
+      res.json(updatedBanner)
+    } else {
+      res.status(404)
+      throw new Error('Order not found')
+    }
+})
 
 // @desc    Delete a product
 // @route   DELETE /api/products/:id
@@ -72,5 +74,6 @@ const getallBanner = asyncHandler( async(req, res) => {
 // })
 
 export {
-    getallBanner
+    getallBanner,
+    updateBanner
 }

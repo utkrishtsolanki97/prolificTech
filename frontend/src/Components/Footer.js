@@ -30,6 +30,7 @@ const Footer = () => {
                        <Link to='/refund-cancellation-policy'><b>Refund and Cancelation</b></Link><br />
                        <Link to='/privacy-policy'><b>Privacy Policy</b></Link><br />
                        <Link to='/terms-conditions'><b>Terms & Conditions</b></Link><br />
+                       <Link to='/shipping-policy'><b>Shipping Policy</b></Link>
                    </Col>
                    <Col md={4} sm={12} xs={12}>
 

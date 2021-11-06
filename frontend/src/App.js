@@ -34,6 +34,7 @@ import TermsAndCondition from './screens/TermsAndCondition';
 import ContactUs from './screens/ContactUs';
 import BannerListScreen from './screens/BannerListScreen';
 import SearchScreen from './screens/SearchScreen';
+import shippingPolicy from './screens/shippingPolicy';
 
 function App() {
   if(localStorage.getItem('userDetails')){
@@ -77,6 +78,7 @@ function App() {
           <Route path='/privacy-policy' component={PrivacyPolicy} exact />
           <Route path='/refund-cancellation-policy' component={RefundCancellationPolicy} exact />
           <Route path='/terms-conditions' component={TermsAndCondition} exact />
+          <Route path='/shipping-policy' component={shippingPolicy} exact />
           <Route path='/contact-us' component={ContactUs} exact />
           <Route path='/' component={AllProductsScreen} exact />
           <Route path='/search/:keyword' component={SearchScreen} />

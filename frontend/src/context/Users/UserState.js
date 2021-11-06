@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useReducer } from 'react'
 import UserContext from './UserContext'
 import UserReducer from './UserReducer'
-import { ADMIN_UPDATE_USER_ERROR_MESSAGE, ADMIN_UPDATE_USER_REFRESH, ADMIN_UPDATE_USER_SUCCESS, DELETE_USER_FAILED, DELETE_USER_SUCCESS, GET_USER_BY_ID, LOGIN_USER, LOGIN_USER_FAILED, LOGOUT_USER, REFRESH_ERROR_MESSAGE, REGISTER_USER_FAILED, REGISTER_USER_SUCCESS, SET_DELETE_USER_REFRESH, SET_LOADING, SET_REGISTER_USER_REFRESH, SET_USER_LIST, SET_USER_LIST_ERROR, UPDATE_USER_FAILED, UPDATE_USER_SUCCESS } from './types'
+import { ADMIN_UPDATE_USER_ERROR_MESSAGE, ADMIN_UPDATE_USER_REFRESH, ADMIN_UPDATE_USER_SUCCESS, DELETE_USER_FAILED, DELETE_USER_SUCCESS, GET_USER_BY_ID, LOGIN_USER, LOGIN_USER_FAILED, LOGOUT_USER, REFRESH_ERROR_MESSAGE, REGISTER_USER_FAILED, REGISTER_USER_SUCCESS, SET_DELETE_USER_REFRESH, SET_LOADING, SET_REGISTER_USER_REFRESH, SET_USER_LIST, SET_USER_LIST_ERROR,  UPDATE_USER_FAILED, UPDATE_USER_SUCCESS } from './types'
 
 const UserState = (props) => {
 
@@ -225,6 +225,8 @@ const UserState = (props) => {
         }
     }
 
+    
+
     return (
         <UserContext.Provider value={{
             user: state.user,
@@ -253,6 +255,7 @@ const UserState = (props) => {
             updateUser,
             updateUserErrorMessage: state.updateUserErrorMessage,
             updateUserStatus: state.updateUserStatus,
+            
         }}>
             {props.children}
         </UserContext.Provider>

@@ -207,6 +207,32 @@ const ProductState = (props) => {
 
     const setLoading = () => dispatch({type: SET_LOADING})
 
+    const updateBanner = async (updatebanner) => {
+        const user = JSON.parse(atob(localStorage.getItem('userDetails')))
+        setLoading()
+        try {
+            const config = {
+                headers: {
+                   Authorization: `Bearer ${user.token}`,
+                  'Content-Type': 'application/json',
+                },
+              }
+            const res = await axios.put('/api/banner',{ updatebanner },config);
+            console.log(res);
+            // dispatch({
+            //     type: UPDATE_BANNER_SUCCESS
+            // })
+            // localStorage.setItem('userDetails',btoa(JSON.stringify(res.data)))
+        } catch (error) {
+            
+            console.log(error.response.data);
+            // dispatch({
+            //     type: UPDATE_BANNER_FAILED,
+            //     payload:  error.response.data,  
+            // })
+        }
+    }
+
     return (
         <productContext.Provider value={{
             getAllProducts,
@@ -233,6 +259,7 @@ const ProductState = (props) => {
             adminupdateProduct,
             adminUpdateProductErrorMessage: state.adminUpdateProductErrorMessage,
             adminupdateProductStatus: state.adminupdateProductStatus,
+            updateBanner,
         }}>
             {props.children}
         </productContext.Provider>

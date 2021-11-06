@@ -5,11 +5,11 @@ const bannerSchema = mongoose.Schema({
         {
             image: { type: String, required: true },
             url: { type: String, required: true },
-            created_by : {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref : 'User'
-            },
+            // created_by : {
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     required: true,
+            //     ref : 'User'
+            // },
             created_on : {
                 type: Date,
             },
@@ -19,13 +19,13 @@ const bannerSchema = mongoose.Schema({
         {
             image: { type: String, required: true },
             url: { type: String, required: true },
-            name: { type: String, required: true },
+            // name: { type: String, required: true },
             shortDesc: { type: String, required: true },
-            created_by : {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref : 'User'
-            },
+            // created_by : {
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     required: true,
+            //     ref : 'User'
+            // },
             created_on : {
                 type: Date,
             },

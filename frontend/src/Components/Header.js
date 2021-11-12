@@ -24,7 +24,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg="light" expand="lg">
+            <Navbar  expand="lg">
                 <div >
                     <LinkContainer to='/'>
                         <Navbar.Brand className="navLogo"><img className='brandLogo' src={Logo} alt='ProlificTech'  /> </Navbar.Brand>

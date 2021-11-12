@@ -48,7 +48,6 @@ const updateBanner = asyncHandler(async (req, res) => {
       const bannernew= req.body.updatebanner
       banner.banner1=bannernew.banner1
       banner.banner2=bannernew.banner2
-      console.log(banner);
       const updatedBanner = await banner.save()
   
       res.json(updatedBanner)

@@ -2,10 +2,13 @@
 .navbar-light .navbar-nav .nav-link {
     color: black;
 }
-
+.navbar{
+    background-color: #006666;
+}
 @media (min-width: 992px) {
     .bg-light {
         padding-left: 40px;
+        
     }
     
     img {

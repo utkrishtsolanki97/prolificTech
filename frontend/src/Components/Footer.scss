@@ -1,5 +1,6 @@
 .footer-background{
     background-color: #006666;
+    font-family: 'Salsa', cursive;
 }
 .footerCss{
     
@@ -33,6 +34,9 @@
     }
     a:hover{
         /* text-decoration: none; */
+    }
+    .copyright{
+        color: black;
     }
 }
 .search-box{

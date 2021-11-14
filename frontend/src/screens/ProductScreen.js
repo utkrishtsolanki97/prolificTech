@@ -15,6 +15,7 @@ const ProductScreen = ({ history, match }) => {
 
 console.log(product);
   useEffect(() => {
+    window.scrollTo(0,0)
         productContext.getProduct(match.params.id)
          // eslint-disable-next-line
   }, [])
